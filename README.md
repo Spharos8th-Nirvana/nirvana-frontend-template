@@ -4,20 +4,26 @@
 
 ## 기술 스택
 
-- Node.js 26.13.1 (LTS)
-- npm 12.2.3
+- Node.js 24.22.3 (LTS)
+- npm 11.19.1 (Node.js 설치 시 함께 제공)
 - Next.js 16.4.6 (App Router)
 - React / React DOM 19.3.1
-- TypeScript 6.0.2 (Next.js 호환 API 패키지)
+- TypeScript 6.0.2
 - Tailwind CSS 4.3.3
 - ESLint 10.15.0
 
 ## 사전 요구사항
 
-- Node.js 26.13.1
-- npm 12.2.3
+- Node.js 24.22.3
+- npm 11.19.1 (Node.js와 함께 설치)
 
-버전 관리 도구를 사용한다면 저장소 루트의 `.nvmrc` 또는 `.node-version`을 읽어 Node.js 버전을 맞춥니다.
+Node.js 설치 후 터미널을 새로 열고 버전을 확인합니다.
+
+```bash
+node --version
+npm --version
+npm run check:toolchain
+```
 
 ## 시작하기
 
@@ -26,19 +32,19 @@
 ```bash
 nvm install
 nvm use
-npm install -g npm@12.2.3
 npm run check:toolchain
 npm install
 cp .env.example .env.local
 npm run dev
 ```
 
-### Windows PowerShell
+### Windows
+
+Node.js 24.22.3 공식 설치 프로그램을 설치한 뒤, 새 PowerShell 창을 열어 실행합니다.
 
 ```powershell
-nvm install 26.13.1
-nvm use 26.13.1
-npm install -g npm@12.2.3
+node --version
+npm --version
 npm run check:toolchain
 npm install
 Copy-Item .env.example .env.local
@@ -47,7 +53,7 @@ npm run dev
 
 개발 서버 실행 후 [http://localhost:3000](http://localhost:3000)에 접속합니다.
 
-최초 `npm install`을 실행하면 `package-lock.json`이 생성됩니다. 이 파일을 저장소에 커밋한 뒤부터 팀원은 `npm ci`로 동일한 의존성 버전을 설치합니다. 템플릿에서 잠금 파일을 생성하기 전에는 `npm ci`를 실행하지 않습니다.
+최초 `npm install`을 실행하면 `package-lock.json`이 생성됩니다. 이 파일을 저장소에 커밋한 뒤부터 팀원은 `npm ci`로 동일한 의존성 버전을 설치합니다. 잠금 파일이 생성되기 전에는 `npm ci`를 실행하지 않습니다.
 
 ## 주요 명령어
 
