@@ -1,4 +1,4 @@
-import { execFileSync } from "node:child_process";
+import { execSync } from "node:child_process";
 
 const expectedNodeVersion = "v26.13.1";
 const expectedNpmVersion = "12.2.3";
@@ -7,11 +7,12 @@ const actualNodeVersion = process.version;
 let actualNpmVersion = "";
 
 try {
-  actualNpmVersion = execFileSync("npm", ["--version"], {
+  actualNpmVersion = execSync("npm --version", {
     encoding: "utf8",
+    stdio: ["ignore", "pipe", "pipe"],
   }).trim();
 } catch {
-  console.error("npm을 찾을 수 없습니다. Node.js 설치 상태를 확인하세요.");
+  console.error("npm을 찾을 수 없습니다. Node.js와 npm 설치 상태를 확인하세요.");
   process.exit(1);
 }
 
