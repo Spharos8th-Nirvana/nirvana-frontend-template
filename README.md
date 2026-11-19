@@ -8,18 +8,20 @@
 - React 19.3
 - TypeScript
 - Tailwind CSS 4
-- ESLint 9
+- ESLint 10
 
 ## 사전 요구사항
 
-- Node.js 20.9 이상
-- npm
+- Node.js 26.13.1
+- npm 12.2.3
 
 ## 시작하기
 
 ```bash
+npm install -g npm@12.2.3
+npm run check:toolchain
 npm install
-cp .env.example .env.local
+Copy-Item .env.example .env.local
 npm run dev
 ```
 
@@ -30,6 +32,8 @@ Copy-Item .env.example .env.local
 ```
 
 개발 서버 실행 후 [http://localhost:3000](http://localhost:3000)에 접속합니다.
+
+`npm install`이 완료되면 생성된 `package-lock.json`을 저장소에 커밋합니다. 이후 팀원은 동일한 잠금 파일 기준으로 `npm ci`를 사용합니다.
 
 ## 주요 명령어
 
