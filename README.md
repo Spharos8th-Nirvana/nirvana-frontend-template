@@ -4,20 +4,40 @@
 
 ## 기술 스택
 
+- Node.js 26.13.1 (LTS)
+- npm 12.2.3
 - Next.js 16.4.6 (App Router)
-- React 19.3
-- TypeScript
-- Tailwind CSS 4
-- ESLint 10
+- React / React DOM 19.3.1
+- TypeScript 6.0.2 (Next.js 호환 API 패키지)
+- Tailwind CSS 4.3.3
+- ESLint 10.15.0
 
 ## 사전 요구사항
 
 - Node.js 26.13.1
 - npm 12.2.3
 
+버전 관리 도구를 사용한다면 저장소 루트의 `.nvmrc` 또는 `.node-version`을 읽어 Node.js 버전을 맞춥니다.
+
 ## 시작하기
 
+### macOS / Linux
+
 ```bash
+nvm install
+nvm use
+npm install -g npm@12.2.3
+npm run check:toolchain
+npm install
+cp .env.example .env.local
+npm run dev
+```
+
+### Windows PowerShell
+
+```powershell
+nvm install 26.13.1
+nvm use 26.13.1
 npm install -g npm@12.2.3
 npm run check:toolchain
 npm install
@@ -25,21 +45,16 @@ Copy-Item .env.example .env.local
 npm run dev
 ```
 
-Windows PowerShell에서는 환경변수 파일을 다음처럼 복사할 수 있습니다.
-
-```powershell
-Copy-Item .env.example .env.local
-```
-
 개발 서버 실행 후 [http://localhost:3000](http://localhost:3000)에 접속합니다.
 
-`npm install`이 완료되면 생성된 `package-lock.json`을 저장소에 커밋합니다. 이후 팀원은 동일한 잠금 파일 기준으로 `npm ci`를 사용합니다.
+최초 `npm install`을 실행하면 `package-lock.json`이 생성됩니다. 이 파일을 저장소에 커밋한 뒤부터 팀원은 `npm ci`로 동일한 의존성 버전을 설치합니다. 템플릿에서 잠금 파일을 생성하기 전에는 `npm ci`를 실행하지 않습니다.
 
 ## 주요 명령어
 
 | 명령어 | 설명 |
 | --- | --- |
 | `npm run dev` | 로컬 개발 서버 실행 |
+| `npm run check:toolchain` | Node.js / npm 버전 검사 |
 | `npm run lint` | ESLint 검사 |
 | `npm run lint:fix` | 자동 수정 가능한 ESLint 규칙 적용 |
 | `npm run typecheck` | TypeScript 타입 검사 |
