@@ -26,13 +26,15 @@ export async function serverApiRequest<T>(
 ): Promise<T> {
   const url = new URL(path, getBackendBaseUrl());
 
+  const headers = new Headers(init.headers);
+  if (!headers.has("Accept")) {
+    headers.set("Accept", "application/json");
+  }
+
   const response = await fetch(url, {
     ...init,
     cache: init.cache ?? "no-store",
-    headers: {
-      Accept: "application/json",
-      ...init.headers,
-    },
+    headers,
   });
 
   if (!response.ok) {
