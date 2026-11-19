@@ -5,7 +5,7 @@
 ## 기술 스택
 
 - Node.js 24.22.3 (LTS)
-- npm 11.19.1 (Node.js 설치 시 함께 제공)
+- pnpm 12.21.0
 - Next.js 16.4.6 (App Router)
 - React / React DOM 19.3.1
 - TypeScript 6.0.2
@@ -15,57 +15,74 @@
 ## 사전 요구사항
 
 - Node.js 24.22.3
-- npm 11.19.1 (Node.js와 함께 설치)
+- pnpm 12.21.0
 
-Node.js 설치 후 터미널을 새로 열고 버전을 확인합니다.
+Node.js 24.22.3을 설치한 뒤 터미널을 새로 열고 버전을 확인합니다.
 
 ```bash
 node --version
-npm --version
-npm run check:toolchain
 ```
+
+pnpm 12.21.0 설치(Windows, macOS, Linux 공통):
+
+```bash
+npm install --global pnpm@12.21.0
+pnpm --version
+```
+
+프로젝트의 `packageManager` 설정은 pnpm 12.21.0을 기준으로 합니다. 다른 버전의 pnpm을 실행하더라도 프로젝트 설정에 따라 고정 버전으로 전환하도록 구성되어 있습니다.
 
 ## 시작하기
 
-### macOS / Linux
+저장소를 내려받은 뒤 프로젝트 루트에서 실행합니다.
 
 ```bash
-nvm install
-nvm use
-npm run check:toolchain
-npm install
-cp .env.example .env.local
-npm run dev
+pnpm run check:toolchain
+pnpm install
 ```
 
-### Windows
+최초 의존성 설치로 `pnpm-lock.yaml`이 생성되면 반드시 Git에 커밋합니다. 이 잠금 파일이 저장소에 포함된 다음부터 팀원은 아래 명령으로 잠금 파일과 정확히 일치하는 의존성을 설치합니다.
 
-Node.js 24.22.3 공식 설치 프로그램을 설치한 뒤, 새 PowerShell 창을 열어 실행합니다.
+```bash
+pnpm install --frozen-lockfile
+```
+
+환경변수 파일을 준비합니다.
+
+macOS / Linux:
+
+```bash
+cp .env.example .env.local
+```
+
+Windows PowerShell:
 
 ```powershell
-node --version
-npm --version
-npm run check:toolchain
-npm install
 Copy-Item .env.example .env.local
-npm run dev
+```
+
+개발 서버를 실행합니다.
+
+```bash
+pnpm dev
 ```
 
 개발 서버 실행 후 [http://localhost:3000](http://localhost:3000)에 접속합니다.
-
-최초 `npm install`을 실행하면 `package-lock.json`이 생성됩니다. 이 파일을 저장소에 커밋한 뒤부터 팀원은 `npm ci`로 동일한 의존성 버전을 설치합니다. 잠금 파일이 생성되기 전에는 `npm ci`를 실행하지 않습니다.
 
 ## 주요 명령어
 
 | 명령어 | 설명 |
 | --- | --- |
-| `npm run dev` | 로컬 개발 서버 실행 |
-| `npm run check:toolchain` | Node.js / npm 버전 검사 |
-| `npm run lint` | ESLint 검사 |
-| `npm run lint:fix` | 자동 수정 가능한 ESLint 규칙 적용 |
-| `npm run typecheck` | TypeScript 타입 검사 |
-| `npm run build` | 운영 빌드 |
-| `npm run start` | 운영 빌드 실행 |
+| `pnpm dev` | 로컬 개발 서버 실행 |
+| `pnpm run check:toolchain` | Node.js / pnpm 버전 검사 |
+| `pnpm lint` | ESLint 검사 |
+| `pnpm lint:fix` | 자동 수정 가능한 ESLint 규칙 적용 |
+| `pnpm typecheck` | TypeScript 타입 검사 |
+| `pnpm build` | 운영 빌드 |
+| `pnpm start` | 운영 빌드 실행 |
+| `pnpm add <package>` | 일반 의존성 추가 |
+| `pnpm add -D <package>` | 개발 의존성 추가 |
+| `pnpm remove <package>` | 의존성 제거 |
 
 ## 환경변수
 
@@ -104,6 +121,7 @@ src/
 4. 핵심 비즈니스 로직, 데이터 정합성, 트랜잭션은 Spring Boot 서비스가 최종 책임을 집니다.
 5. 민감정보를 브라우저 저장소나 로그에 남기지 않습니다.
 6. 요청·응답 타입은 확정된 API 계약을 기준으로 정의합니다. 무분별한 `any` 사용은 피합니다.
+7. 의존성 변경은 pnpm 명령으로만 수행하고 `pnpm-lock.yaml` 변경을 함께 커밋합니다.
 
 ## 관련 문서
 

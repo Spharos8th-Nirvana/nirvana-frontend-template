@@ -1,18 +1,18 @@
 import { execSync } from "node:child_process";
 
 const expectedNodeVersion = "v24.22.3";
-const expectedNpmVersion = "11.19.1";
+const expectedPnpmVersion = "12.21.0";
 
 const actualNodeVersion = process.version;
-let actualNpmVersion = "";
+let actualPnpmVersion = "";
 
 try {
-  actualNpmVersion = execSync("npm --version", {
+  actualPnpmVersion = execSync("pnpm --version", {
     encoding: "utf8",
     stdio: ["ignore", "pipe", "pipe"],
   }).trim();
 } catch {
-  console.error("npm을 찾을 수 없습니다. Node.js 설치 상태를 확인하세요.");
+  console.error("pnpm을 찾을 수 없습니다. pnpm 12.21.0 설치 상태를 확인하세요.");
   process.exit(1);
 }
 
@@ -22,8 +22,8 @@ if (actualNodeVersion !== expectedNodeVersion) {
   errors.push(`Node.js: expected ${expectedNodeVersion}, received ${actualNodeVersion}`);
 }
 
-if (actualNpmVersion !== expectedNpmVersion) {
-  errors.push(`npm: expected ${expectedNpmVersion}, received ${actualNpmVersion}`);
+if (actualPnpmVersion !== expectedPnpmVersion) {
+  errors.push(`pnpm: expected ${expectedPnpmVersion}, received ${actualPnpmVersion}`);
 }
 
 if (errors.length > 0) {
@@ -34,4 +34,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log("Node.js 24.22.3 / npm 11.19.1 확인 완료");
+console.log("Node.js 24.22.3 / pnpm 12.21.0 확인 완료");
